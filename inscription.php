@@ -23,52 +23,58 @@
 				</form>";
 			}
 
-
-			if(isset($_POST["inscription"])){
-				$nom = $_POST["nom"];
-				$prenom = $_POST["prenom"];
-				$mail = $_POST["mail"];
-				$MDP = $_POST["MDP"];
-				$reentrerMDP = $_POST["reentrerMDP"];
-				$ville = $_POST["ville"];
-				$postal = $_POST["postal"];
-				$adresse = $_POST["adresse"];
-				if(!empty($nom)&&!empty($prenom)&&!empty($mail)&&!empty($MDP)&&!empty($reentrerMDP)&&!empty($ville)&&!empty($postal)&&!empty($adresse)){
-					if($MDP == $reentrerMDP && !AdresseUtilise($mail)){
-						inscription($nom, $prenom, $mail, $MDP, $ville, $postal, $adresse);
-						echo "Merci de vous être inscrit. <br/>" ;
+			if(!connecte()){
+				if(isset($_POST["inscription"])){
+					$nom = $_POST["nom"];
+					$prenom = $_POST["prenom"];
+					$mail = $_POST["mail"];
+					$MDP = $_POST["MDP"];
+					$reentrerMDP = $_POST["reentrerMDP"];
+					$ville = $_POST["ville"];
+					$postal = $_POST["postal"];
+					$adresse = $_POST["adresse"];
+					if(!empty($nom)&&!empty($prenom)&&!empty($mail)&&!empty($MDP)&&!empty($reentrerMDP)&&!empty($ville)&&!empty($postal)&&!empty($adresse)){
+						if($MDP == $reentrerMDP && !AdresseUtilise($mail)){
+							inscription($nom, $prenom, $mail, $MDP, $ville, $postal, $adresse);
+							echo "Merci de vous être inscrit. <br/>" ;
+						}
+						else{
+							if($MDP != $reentrerMDP){
+								echo "Les mots de passe saisis ne sont pas identique, veuillez les ressaisir :<br/>";
+								$MDP = Null;
+								$reentrerMDP = Null;
+							}
+							if(AdresseUtilise($mail)){
+								echo "L'adresse mail est déjà utilisé, veuillez vous connecter ou utiliser une autre adresse mail.<br/>";
+								$MDP = Null;
+								$reentrerMDP = Null;
+								$mail = Null;
+							}
+							AfficherFormulaire($nom, $prenom, $mail, $MDP, $reentrerMDP, $ville, $postal, $adresse);
+						}
 					}
-					else{
-						if($MDP != $reentrerMDP){
-							echo "Les mots de passe saisis ne sont pas identique, veuillez les ressaisir :<br/>";
-							$MDP = Null;
-							$reentrerMDP = Null;
-						}
-						if(AdresseUtilise($mail)){
-							echo "L'adresse mail est déjà utilisé, veuillez vous connecter ou utiliser une autre adresse mail.<br/>";
-							$MDP = Null;
-							$reentrerMDP = Null;
-							$mail = Null;
-						}
+					else {
+						echo "Merci de remplire toutes les cases du formulaire :<br/>";
 						AfficherFormulaire($nom, $prenom, $mail, $MDP, $reentrerMDP, $ville, $postal, $adresse);
 					}
 				}
-				else {
-					echo "Merci de remplire toutes les cases du formulaire :<br/>";
+				else{
+					$nom = Null;
+					$prenom = Null;
+					$mail = Null;
+					$MDP = Null;
+					$reentrerMDP = Null;
+					$ville = Null;
+					$postal = Null;
+					$adresse = Null;
 					AfficherFormulaire($nom, $prenom, $mail, $MDP, $reentrerMDP, $ville, $postal, $adresse);
 				}
 			}
-			else{
-				$nom = Null;
-				$prenom = Null;
-				$mail = Null;
-				$MDP = Null;
-				$reentrerMDP = Null;
-				$ville = Null;
-				$postal = Null;
-				$adresse = Null;
-				AfficherFormulaire($nom, $prenom, $mail, $MDP, $reentrerMDP, $ville, $postal, $adresse);
-			}
+			else {
+					header('Refresh: 3;URL=authentification.php');
+					echo "Vous êtes déjà connecté vous allez être redirigé vers la page d'acceuil." ;
+
+				}
 		?>
 	</body>
 </html>

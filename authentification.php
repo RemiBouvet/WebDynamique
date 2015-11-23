@@ -18,30 +18,44 @@
 						</form>
 					<?php
 				}
-
-
-				if(isset($_POST["connection"])){
-					$email = $_POST["email"];
-					$MDP = $_POST["MDP"];
-					if(!isset($email)){
-						echo "Veuillez entrer votre addresse mail<br/>";
-						AfficherFormulaire();
-					}
-					else if (!isset($MDP)){
-						echo "Veuillez entrer un mot de passe :<br/>";
-						AfficherFormulaire();
-					}
-					else if (connectionValide($email, $MDP)){
-						$GLOBALS["Session"] = $email;
-						echo "Connection réussie !" ;
+				if(isset($_POST["deconnection"])){
+					deconnection();
+				}
+				if(!connecte()){
+					if(isset($_POST["connection"])){
+						$email = $_POST["email"];
+						$MDP = $_POST["MDP"];
+						if(!isset($email)){
+							echo "Veuillez entrer votre addresse mail<br/>";
+							AfficherFormulaire();
+						}
+						else if (!isset($MDP)){
+							echo "Veuillez entrer un mot de passe :<br/>";
+							AfficherFormulaire();
+						}
+						else if (connectionValide($email, $MDP)){
+							connection($email);
+							header('Refresh: 3;URL=authentification.php');
+							echo "Connection réussie !" ;
+						}
+						else {
+							echo "Identifiants invalides !";
+							AfficherFormulaire();
+						}
 					}
 					else {
-						echo "Identifiants invalides !";
 						AfficherFormulaire();
 					}
 				}
 				else {
-					AfficherFormulaire();
+					echo "Bonjour ".$_SESSION["Email"];
+					echo "<br/> "
+					?>
+						<form method='post' action='authentification.php'>
+							<input type='submit' value='Se deconnecter' name ='deconnection' />
+						</form>
+					<?php
+
 				}
 		?>
 	</body>

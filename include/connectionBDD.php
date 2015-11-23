@@ -1,4 +1,5 @@
 <?php 
+		session_start();
 		$Serveur="localhost";
 		$Utilisateur="root";
 		$Base="info201a";
@@ -12,7 +13,7 @@
 		$GLOBALS["Jeux"] = "fc_grp5_jeux";
 		$GLOBALS["Stock"] = "fc_grp5_jeuxludotheque";
 		$GLOBALS["Panier"] = "fc_grp5_panier";
-		$GLOBALS["Session"] = Null;
+
 
 		function connectionValide($mail, $password){
 			$reponse = Null;
@@ -44,9 +45,6 @@
 	            "Postal" => $postal,
 	            "Adresse" => $adresse
 	            ));
-	        while ($donnees = $resp->fetch()){
-				$GLOBALS["Session"] = $donnees['Email'];
-			}
 		}
 
 		function AdresseUtilise($mail){
@@ -61,5 +59,15 @@
 			else{
 				return False;
 			}
+		}
+		function connection($email) {
+			$_SESSION["Email"] = $email;
+		}
+		function deconnection() {
+			session_unset();
+			session_destroy();
+		}
+		function connecte() {
+			return isset($_SESSION["Email"]);
 		}
 ?>
