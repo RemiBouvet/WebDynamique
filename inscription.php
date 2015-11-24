@@ -71,7 +71,7 @@
 				}
 			}
 			else {
-					header('Refresh: 3;URL=authentification.php');
+					header('Refresh: 3;URL=index.php');
 					echo "Vous êtes déjà connecté vous allez être redirigé vers la page d'acceuil." ;
 
 				}
