@@ -23,6 +23,10 @@
 					SupprimerPanier($_GET["id"]);
 					header("Location: panier.php");
 				}
+				if(isset($_POST['reserver'])){
+					AjoutReservation($_POST['date_retrait']);
+					header("Location: panier.php");
+				}
 				$panier = chercherPanier();
 				$nb=$panier->rowCount();
 				if($nb){
@@ -48,7 +52,13 @@
 						}
 					?>
 						</table>
+						<form method='post' action='panier.php'>
+						Entrez un jour de retrait pour votre panier (sous la forme aaaa-mm-jj): <input type="date" name="date_retrait">
+						<input type='submit' value='Réserver le panier' name ='reserver' />
+						</form>
+
 			<?php
+
 				}
 				else {
 					echo "Votre panier est vide.";

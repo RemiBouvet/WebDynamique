@@ -106,4 +106,24 @@
 	        $GLOBALS["BDD"]->exec($req);
 		}
 
+		function AjoutReservation($date_retrait){
+			$req = "SELECT * FROM ". $GLOBALS['Panier']. " WHERE id_user =".$_SESSION["id_user"];
+			$resp = $GLOBALS["BDD"]->query($req);
+						while ($donnees = $resp->fetch()){
+									$insert = $GLOBALS["BDD"]->prepare("INSERT INTO ". $GLOBALS['Reservation']. " (id_user, id_jeu, date_retrait) VALUES ('".$_SESSION["id_user"]."', '".$donnees['id_jeu']."', '".$date_retrait."')");
+							        $insert->execute(array(
+							            "id_user" => $_SESSION["id_user"],
+							            "id_jeu" => $donnees["id_jeu"],
+										'date_retrait' => $date_retrait
+										));
+									
+									$req = "UPDATE FROM ". $GLOBALS['Jeux']. " SET stock = :nouveauStock WHERE id_jeu =".$donnees["id_jeu"];
+									$update = $GLOBALS["BDD"]->prepare($req);
+									$update->execute(array(
+										'nouveauStock' => $donnees['stock']-1
+										));
+									$req = "DELETE FROM ". $GLOBALS['Panier']. " WHERE id_panier =".$donnees["id_panier"];
+	       							$GLOBALS["BDD"]->exec($req);
+						}
+		}
 ?>
