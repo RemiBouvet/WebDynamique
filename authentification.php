@@ -1,7 +1,7 @@
 <?php
 	function AfficherConnection(){
 		?>
-			<form method='post' action='index.php'>
+			<form method='post' action='<?php echo $_SERVER['PHP_SELF'] ?>'>
 				Email : <input type='text' name='email' maxlength='50'/><br /><br />
 				Mot de passe : <input type='password' name='MDP' maxlength='50'/><br /><br />
 				<input type='submit' value='Se connecter' name ='connection' />
@@ -25,7 +25,7 @@
 			}
 			else if (connectionValide($email, $MDP)){
 				connection($email);
-				header('Refresh: 0;URL=index.php');
+				header("Location: ".$_SERVER['PHP_SELF']);
 				echo "Connection réussie !" ;
 			}
 			else {
@@ -41,7 +41,7 @@
 		echo "Bonjour ".$_SESSION["Email"];
 		echo "<br/> "
 		?>
-			<form method='post' action='index.php'>
+			<form method='post' action='<?php echo $_SERVER['PHP_SELF'] ?>'>
 				<input type='submit' value='Se deconnecter' name ='deconnection' />
 			</form>
 		<?php

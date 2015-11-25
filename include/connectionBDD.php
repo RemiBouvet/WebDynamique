@@ -11,7 +11,7 @@
 		$GLOBALS["BDD"] = $bdd;
 		$GLOBALS["Utilisateur"] = "vr_grp5_users";
 		$GLOBALS["Jeux"] = "vr_grp5_jeux";
-		$GLOBALS["Stock"] = "fc_grp5_jeuxludotheque";
-		$GLOBALS["Panier"] = "fc_grp5_panier";
+		$GLOBALS["Panier"] = "vr_grp5_panier";
+		$GLOBALS["Reservation"] = "vr_grp5_reservation";
 
 ?>

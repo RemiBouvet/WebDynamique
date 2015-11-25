@@ -11,6 +11,7 @@
 		<h1>Page d'inscription </h1>
 		<?php
 				include("authentification.php");
+				include("menu.php");
 			?>
 		<?php
 			function AfficherInscription($nom, $prenom, $mail, $MDP, $reentrerMDP, $ville, $postal, $adresse){
@@ -75,7 +76,7 @@
 				}
 			}
 			else {
-					header('Refresh: 3;URL=index.php');
+					header("Location: index.php");
 					echo "Vous êtes déjà connecté vous allez être redirigé vers la page d'acceuil." ;
 
 				}
