@@ -1,5 +1,6 @@
 <?php
 	include("include/connectionBDD.php");
+	include("include/fonction.php");
 ?>
 <html>
 	<head>
@@ -9,7 +10,10 @@
 	<body>
 		<h1>Page d'inscription </h1>
 		<?php
-			function AfficherFormulaire($nom, $prenom, $mail, $MDP, $reentrerMDP, $ville, $postal, $adresse){
+				include("authentification.php");
+			?>
+		<?php
+			function AfficherInscription($nom, $prenom, $mail, $MDP, $reentrerMDP, $ville, $postal, $adresse){
 				echo "<form method='post' action='inscription.php'> 
 					Adresse mail : <input type='text' name='mail' maxlength='255' value='".$mail."'/><br /><br />
 					Mot de passe : <input type='password' name='MDP' maxlength='64' value='".$MDP."'/><br /><br />
@@ -50,12 +54,12 @@
 								$reentrerMDP = Null;
 								$mail = Null;
 							}
-							AfficherFormulaire($nom, $prenom, $mail, $MDP, $reentrerMDP, $ville, $postal, $adresse);
+							AfficherInscription($nom, $prenom, $mail, $MDP, $reentrerMDP, $ville, $postal, $adresse);
 						}
 					}
 					else {
 						echo "Merci de remplire toutes les cases du formulaire :<br/>";
-						AfficherFormulaire($nom, $prenom, $mail, $MDP, $reentrerMDP, $ville, $postal, $adresse);
+						AfficherInscription($nom, $prenom, $mail, $MDP, $reentrerMDP, $ville, $postal, $adresse);
 					}
 				}
 				else{
@@ -67,7 +71,7 @@
 					$ville = Null;
 					$postal = Null;
 					$adresse = Null;
-					AfficherFormulaire($nom, $prenom, $mail, $MDP, $reentrerMDP, $ville, $postal, $adresse);
+					AfficherInscription($nom, $prenom, $mail, $MDP, $reentrerMDP, $ville, $postal, $adresse);
 				}
 			}
 			else {

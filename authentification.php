@@ -1,7 +1,7 @@
 <?php
-	function AfficherFormulaire(){
+	function AfficherConnection(){
 		?>
-			<form method='post' action='authentification.php'>
+			<form method='post' action='index.php'>
 				Email : <input type='text' name='email' maxlength='50'/><br /><br />
 				Mot de passe : <input type='password' name='MDP' maxlength='50'/><br /><br />
 				<input type='submit' value='Se connecter' name ='connection' />
@@ -17,31 +17,31 @@
 			$MDP = $_POST["MDP"];
 			if(!isset($email)){
 				echo "Veuillez entrer votre addresse mail<br/>";
-				AfficherFormulaire();
+				AfficherConnection();
 			}
 			else if (!isset($MDP)){
 				echo "Veuillez entrer un mot de passe :<br/>";
-				AfficherFormulaire();
+				AfficherConnection();
 			}
 			else if (connectionValide($email, $MDP)){
 				connection($email);
-				header('Refresh: 3;URL=authentification.php');
+				header('Refresh: 0;URL=index.php');
 				echo "Connection réussie !" ;
 			}
 			else {
 				echo "Identifiants invalides !";
-				AfficherFormulaire();
+				AfficherConnection();
 			}
 		}
 		else {
-			AfficherFormulaire();
+			AfficherConnection();
 		}
 	}
 	else {
 		echo "Bonjour ".$_SESSION["Email"];
 		echo "<br/> "
 		?>
-			<form method='post' action='authentification.php'>
+			<form method='post' action='index.php'>
 				<input type='submit' value='Se deconnecter' name ='deconnection' />
 			</form>
 		<?php
