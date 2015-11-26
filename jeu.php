@@ -47,7 +47,8 @@
 						<li>Type de jeu : <?php echo $donnees['type'] ?></li>
 						<li>Nombre maximum de joueurs : <?php echo $donnees['nb_max'] ?></li>
 						<li>Nombre minimum de joueurs : <?php echo $donnees['nb_min'] ?></li>
-					</ul>	
+					</ul>
+					<p><?php echo $donnees['description'] ?></p>
 					<?php
 					}
 				}

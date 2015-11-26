@@ -38,7 +38,7 @@
 		}
 	}
 	else {
-		echo "Bonjour ".$_SESSION["Email"];
+		echo "Bonjour ".$_SESSION["Prenom"]." ".$_SESSION["Nom"];
 		echo "<br/> "
 		?>
 			<form method='post' action='<?php echo $_SERVER['PHP_SELF'] ?>'>

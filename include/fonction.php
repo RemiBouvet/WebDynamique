@@ -45,12 +45,13 @@
 			}
 		}
 		function connection($email) {
-			$resp = $GLOBALS["BDD"]->query("SELECT id_user FROM ". $GLOBALS['Utilisateur']. "  WHERE Email = '" . $email . "'");
+			$resp = $GLOBALS["BDD"]->query("SELECT * FROM ". $GLOBALS['Utilisateur']. "  WHERE Email = '" . $email . "'");
 			while ($donnees = $resp->fetch()){
-				$id_user = $donnees['id_user'];
+				$_SESSION["id_user"] = $donnees['id_user'];
+				$_SESSION["Email"] = $email;
+				$_SESSION["Nom"] = $donnees['Nom'];
+				$_SESSION["Prenom"] = $donnees['Prenom'];
 			}
-			$_SESSION["id_user"] = $id_user;
-			$_SESSION["Email"] = $email;
 		}
 		function deconnection() {
 			session_unset();
@@ -59,7 +60,12 @@
 		function connecte() {
 			return isset($_SESSION["Email"]);
 		}
-
+	
+		function chercherIndex(){
+			$req = "SELECT * FROM " . $GLOBALS["Jeux"]. " WHERE stock > 0";
+			return $GLOBALS["BDD"]->query($req);
+		}
+		
 		function chercherJeux(){
 				$req = "SELECT * FROM " . $GLOBALS["Jeux"];
 				if (isset($_GET["trier"])) {
@@ -117,10 +123,9 @@
 										'date_retrait' => $date_retrait
 										));
 									
-									$req = "UPDATE FROM ". $GLOBALS['Jeux']. " SET stock = :nouveauStock WHERE id_jeu =".$donnees["id_jeu"];
+									$req = "UPDATE ". $GLOBALS['Jeux']. " SET stock = stock - 1 WHERE id_jeu =".$donnees["id_jeu"];
 									$update = $GLOBALS["BDD"]->prepare($req);
 									$update->execute(array(
-										'nouveauStock' => $donnees['stock']-1
 										));
 									$req = "DELETE FROM ". $GLOBALS['Panier']. " WHERE id_panier =".$donnees["id_panier"];
 	       							$GLOBALS["BDD"]->exec($req);

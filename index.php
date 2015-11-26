@@ -13,5 +13,17 @@
 				include("authentification.php");
 				include("menu.php");
 			?>
+			<?php
+				$index = chercherIndex();
+			?>
+				<?php
+					while($donnees = $index->fetch()) {
+					?>
+						<a href="jeu.php?id=<?php echo $donnees['id_jeu'] ?>"><?php echo $donnees['nom'] ?></a>
+						<img src="IMG/<?php echo $donnees['id_jeu'] ?>.jpg" alt="jacquette">
+						<p><?php echo $donnees['description'] ?></p>
+					<?php
+					}
+				?>
 	</body>
 </html>
