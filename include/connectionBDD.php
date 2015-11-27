@@ -4,7 +4,7 @@
 		$Utilisateur="root"; //info201a_user
 		$Base="info201a";
 		$MDP=''; //com72
-		$bdd=new PDO('mysql:host='.$Serveur.';dbname='.$Base.';charset=utf8', $Utilisateur, $MDP);
+		$bdd=new PDO('mysql:host='.$Serveur.';dbname='.$Base.'', $Utilisateur, $MDP, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 		if (!$bdd) {
 			exit("Connection à la base de donnée impossible.");
 		}
