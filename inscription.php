@@ -4,27 +4,48 @@
 ?>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>Inscription</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="style.css" />
+		<title>Ludothèque - Accueil</title>
 	</head>
-	<body>
-		<h1>Page d'inscription </h1>
-		<?php
-				include("authentification.php");
+	<div id="header"></div> 
+    <header>
+        <h1>LUDOTHEQUE - Inscription</h1>
+        <nav>
+        	<?php
 				include("menu.php");
 			?>
-		<?php
+        </nav>
+    </header>
+	<body>
+	<div id="page">
+		<h2>Inscription</h2>
+		<div class="connexion">
+		<section> 
+			    <h2>Connexion</h2>
+            <section>
+            <?php
+            	include("authentification.php");
+            ?>
+        </section>
+		</div>
+
+		<section>
+			<p> </p>
+
+			<section class="bloc_droit">
+				<?php
 			function AfficherInscription($nom, $prenom, $mail, $MDP, $reentrerMDP, $ville, $postal, $adresse){
 				echo "<form method='post' action='inscription.php'> 
-					Adresse mail : <input type='text' name='mail' maxlength='255' value='".$mail."'/><br /><br />
-					Mot de passe : <input type='password' name='MDP' maxlength='64' value='".$MDP."'/><br /><br />
-					Mot de passe : <input type='password' name='reentrerMDP' maxlength='64' value='".$reentrerMDP."'/><br /><br />
-					Nom : <input name='nom' type='text' maxlength='64' value='".$nom."' /> <br /> <br />
-					Prénom : <input name='prenom' type='text' maxlength='64' value='".$prenom."'/><br /><br />
-					Ville : <input name='ville' type='text' maxlength='64' value='".$ville."'/><br /><br />
-					Code postal : <input name='postal' type='text' maxlength='64' value='".$postal."'/><br /><br />
-					Adresse : <input name='adresse' type='text' maxlength='255' value='".$adresse."'/><br /><br />
-					<input type='submit' value='Inscription' name ='inscription' />
+					Adresse mail : <input class='inputInscription' type='text' name='mail' maxlength='255' value='".$mail."'/><br /><br />
+					Mot de passe : <input class='inputInscription' type='password' name='MDP' maxlength='64' value='".$MDP."'/><br /><br />
+					Mot de passe : <input class='inputInscription' type='password' name='reentrerMDP' maxlength='64' value='".$reentrerMDP."'/><br /><br />
+					Nom : <input class='inputInscription' name='nom' type='text' maxlength='64' value='".$nom."' /> <br /> <br />
+					Prénom : <input class='inputInscription' name='prenom' type='text' maxlength='64' value='".$prenom."'/><br /><br />
+					Ville : <input class='inputInscription' name='ville' type='text' maxlength='64' value='".$ville."'/><br /><br />
+					Code postal : <input class='inputInscription' name='postal' type='text' maxlength='64' value='".$postal."'/><br /><br />
+					Adresse : <input class='inputInscription' name='adresse' type='text' maxlength='255' value='".$adresse."'/><br /><br />
+					<div class='inscription'> <input type='submit' value='Inscription' name ='inscription' /></div>
 				</form>";
 			}
 
@@ -81,5 +102,12 @@
 
 				}
 		?>
+			</section>
+		</section>
+
+		<footer>
+			
+		</footer>
+	</div>
 	</body>
 </html>

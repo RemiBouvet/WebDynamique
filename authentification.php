@@ -2,7 +2,7 @@
 	function AfficherConnection(){
 		?>
 			<form method='post' action='<?php echo $_SERVER['PHP_SELF'] ?>'>
-				Email : <input type='text' name='email' maxlength='50'/><br /><br />
+				Adresse mail : <input type='text' name='email' maxlength='50'/><br /><br />
 				Mot de passe : <input type='password' name='MDP' maxlength='50'/><br /><br />
 				<input type='submit' value='Se connecter' name ='connection' />
 			</form>
@@ -10,6 +10,7 @@
 	}
 	if(isset($_POST["deconnection"])){
 		deconnection();
+		header("Location: ".$_SERVER['PHP_SELF']);
 	}
 	if(!connecte()){
 		if(isset($_POST["connection"])){

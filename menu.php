@@ -1,10 +1,12 @@
 <?php
-	echo "<a href='index.php'>Acceuil</a><br /> 
-	<a href='jeux.php'>Nos jeux</a><br />";
+	echo "<ul>";
+	echo "<li> <a href='index.php'>Accueil</a> </li> 
+	<li><a href='jeux.php'>Nos jeux</a></li>";
     if(connecte()){
-    	echo "<a href='panier.php'>Panier</a><br />";
+    	echo "<li><a href='panier.php'>Panier</a></li>";
     }
     else {
-    	echo "<a href='inscription.php'>Inscription</a><br />";
+    	echo "<li><a href='inscription.php'>Inscription</a></li>";
     }
+    echo "</ul>";
 ?>

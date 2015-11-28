@@ -44,6 +44,20 @@
 				return False;
 			}
 		}
+		function JeuPanier($id_jeu){
+			$reponse = Null;
+			$resp = $GLOBALS["BDD"]->query("SELECT id_user,id_jeu FROM ". $GLOBALS['Panier']. " WHERE id_user ='".$_SESSION["id_user"]."' AND id_jeu = '".$id_jeu."'");
+			while ($donnees = $resp->fetch()){
+				$reponse = $donnees['id_jeu'];
+			}
+			if($reponse == $id_jeu){
+				return True;
+			}
+			else{
+				return False;
+			}
+		}
+
 		function connection($email) {
 			$resp = $GLOBALS["BDD"]->query("SELECT * FROM ". $GLOBALS['Utilisateur']. "  WHERE Email = '" . $email . "'");
 			while ($donnees = $resp->fetch()){
@@ -131,4 +145,13 @@
 	       							$GLOBALS["BDD"]->exec($req);
 						}
 		}
+
+		function NombreArticle(){
+			$resp = $GLOBALS["BDD"]->query("SELECT COUNT(*) AS NB FROM ". $GLOBALS['Panier']. " WHERE id_user ='".$_SESSION["id_user"]."'");
+			while ($donnees = $resp->fetch()){
+				$reponse = $donnees['NB'];
+			}
+			return $reponse;
+		}
+
 ?>

@@ -2,22 +2,46 @@
 	include("include/connectionBDD.php");
 	include("include/fonction.php");
 ?>
+
+
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>Panier</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="style.css" />
+		<title>Ludothèque - Panier</title>
 	</head>
-	<body>
-		<h1>Panier</h1>
-			<?php
-				include("authentification.php");
+	<div id="header"></div> 
+    <header>
+        <h1>LUDOTHEQUE - Panier</h1>
+        <nav>
+          <?php
+				
 				include("menu.php");
 			?>
-			<?php
-				if(!connecte()){
-					header("Location: index.php");
-				}
-			?>
+        </nav>
+    </header>
+	<body>
+	<div id="page">
+		<h2>Accueil</h2>
+		<div class="connexion">
+		<section> 
+			    <h2>Connexion</h2>
+            <section>
+            <?php
+            include("authentification.php");
+            ?>
+        </section>
+		</div>
+
+		<section>
+			<p> </p>
+
+			<section class="bloc_droit">
+				<?php
+					if(!connecte()){
+						header("Location: index.php");
+					}
+				?>
 			<?php
 				if(isset($_POST['supprimer'])){
 					SupprimerPanier($_GET["id"]);
@@ -25,7 +49,7 @@
 				}
 				if(isset($_POST['reserver'])){
 					AjoutReservation($_POST['date_retrait']);
-					header("Location: panier.php");
+					header("Location: panier.php?success");
 				}
 				$panier = chercherPanier();
 				$nb=$panier->rowCount();
@@ -54,15 +78,27 @@
 						</table>
 						<form method='post' action='panier.php'>
 						Entrez un jour de retrait pour votre panier (sous la forme aaaa-mm-jj): <input type="date" name="date_retrait">
-						<input type='submit' value='Réserver le panier' name ='reserver' />
+						<input type='submit' value='Confirmer la réservation' name ='reserver' />
 						</form>
 
 			<?php
 
 				}
 				else {
-					echo "Votre panier est vide.";
+					if(isset($_GET["success"])){
+						echo "Votre réservation a bien été prise en compte.";
+					}
+					else{
+						echo "Votre panier est vide.";
+					}
 				}
 			?>
+			</section>
+		</section>
+
+		<footer>
+			
+		</footer>
+	</div>
 	</body>
 </html>
