@@ -1,5 +1,6 @@
 <?php 
-		session_start();
+		session_start(); // On démarre une nouvelle session ou on reprend une session existante
+		//Information de connection à la base
 		$Serveur="localhost";//info.univ-lemans.fr
 		$Utilisateur="root"; //info201a_user
 		$Base="info201a";
@@ -8,6 +9,7 @@
 		if (!$bdd) {
 			exit("Connection à la base de donnée impossible.");
 		}
+		//Mise en place des variables globales pour l'utilisation des tables et de la base.
 		$GLOBALS["BDD"] = $bdd;
 		$GLOBALS["Utilisateur"] = "vr_grp5_users";
 		$GLOBALS["Jeux"] = "vr_grp5_jeux";

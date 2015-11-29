@@ -45,18 +45,18 @@
 					}
 				?>
 			<?php
-				if(isset($_POST['supprimer'])){
-					SupprimerPanier($_GET["id"]);
-					header("Location: panier.php");
+				if(isset($_POST['supprimer'])){ //Si l'utilisateur a appuyé sur le bouton supprimer
+					SupprimerPanier($_GET["id"]); 
+					header("Location: panier.php"); //Actualiser la page
 				}
 				if(isset($_POST['reserver'])){
-					$date_retrait = $_POST['annee']."-".$_POST['mois']."-".$_POST['jour'];
+					$date_retrait = $_POST['annee']."-".$_POST['mois']."-".$_POST['jour']; //Formater la date
 					AjoutReservation($date_retrait);
-					header("Location: panier.php?success");
+					header("Location: panier.php?success"); //Actualiser la page avec la variable success
 				}
-				$panier = chercherPanier();
-				$nb=$panier->rowCount();
-				if($nb){
+				$panier = chercherPanier(); //On recherche les jeux du panier à afficher
+				$nb=$panier->rowCount(); // On regarde si le panier de l'utilisateur est vide
+				if($nb){ //Si il n'est pas vide on l'affiche
 				?>
 					<table>
 						<tr>
@@ -79,8 +79,8 @@
 						}
 					?>
 						</table>
+						<!--On affiche le formulaire pour rentrer la date de retrait du panier.-->
 						<form method='post' action='panier.php'>
-						<!--<input type="date" name="date_retrait">-->
 
 								Entrez un jour de retrait pour votre panier :
 								<select name="jour">
@@ -123,11 +123,11 @@
 			<?php
 
 				}
-				else {
-					if(isset($_GET["success"])){
+				else { // Si le panier est vide
+					if(isset($_GET["success"])){ // Si il vient d'être reservé
 						echo "Votre réservation a bien été prise en compte.";
 					}
-					else{
+					else{ // Sinon on affiche que le panier est vide
 						echo "Votre panier est vide.";
 					}
 				}
