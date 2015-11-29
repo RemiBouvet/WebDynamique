@@ -6,7 +6,7 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="style.css" />
-		<title>Ludothèque - Accueil</title>
+		<title>Ludothèque - Inscription</title>
 	</head>
 	<div id="header"></div> 
     <header>

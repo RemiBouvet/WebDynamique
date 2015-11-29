@@ -22,7 +22,7 @@
     </header>
 	<body>
 	<div id="page">
-		<h2>Accueil</h2>
+		<h2>Votre Panier</h2>
 		<div class="connexion">
 		<section> 
 			    <h2>Connexion</h2>
@@ -48,7 +48,8 @@
 					header("Location: panier.php");
 				}
 				if(isset($_POST['reserver'])){
-					AjoutReservation($_POST['date_retrait']);
+					$date_retrait = $_POST['annee']."-".$_POST['mois']."-".$_POST['jour'];
+					AjoutReservation($date_retrait);
 					header("Location: panier.php?success");
 				}
 				$panier = chercherPanier();
@@ -57,15 +58,15 @@
 				?>
 					<table>
 						<tr>
-							<th>Nom</th>
-							<th></th>
+							<th class="bordures">Nom</th>
+							<th class="bordures"></th>
 						</tr>
 					<?php
 						while($donnees = $panier->fetch()) {
 						?>
 							<tr>
-								<td><a href="jeu.php?id=<?php echo $donnees['id_jeu'] ?>"><?php echo $donnees['nom'] ?></a></td>
-								<td><?php
+								<td class="bordures"><a href="jeu.php?id=<?php echo $donnees['id_jeu'] ?>"><?php echo $donnees['nom'] ?></a></td>
+								<td class="bordures"><?php
 									echo "<form method='post' action='panier.php?id=".$donnees['id_jeu']."'>
 											<input type='submit' value='Supprimer du panier' name ='supprimer' />
 										</form>";
@@ -77,7 +78,43 @@
 					?>
 						</table>
 						<form method='post' action='panier.php'>
-						Entrez un jour de retrait pour votre panier (sous la forme aaaa-mm-jj): <input type="date" name="date_retrait">
+						<!--<input type="date" name="date_retrait">-->
+
+								Entrez un jour de retrait pour votre panier :
+								<select name="jour">
+								<?php
+								    for($jour = 1; $jour <= 31; $jour++)
+								        {
+								    ?>
+								        <option value="<?php echo $jour ?>"><?php echo $jour?></option>
+								<?php
+								        }
+								?>
+								</select>
+								 
+								<select name="mois">
+								<?php
+								    for($mois = 1; $mois <= 12; $mois++)
+								        {
+								    ?>
+								        <option value="<?php echo $mois ?>"><?php echo $mois ?></option>
+								<?php
+								        }
+								?>     
+								</select>
+								 
+								<select name="annee">
+								<?php
+								    for($annee = 2015; $annee <= 2016; $annee++)
+								        {
+								   ?>
+								        <option value="<?php echo $annee ?>"><?php echo $annee ?></option>
+								<?php
+								        }
+								?>
+								</select>
+
+
 						<input type='submit' value='Confirmer la réservation' name ='reserver' />
 						</form>
 

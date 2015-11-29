@@ -75,6 +75,7 @@
 								echo "Le jeu est indisponible pour le moment.</ br>";
 							}
 					?>
+					<br />
 					<img src="IMG/<?php echo $donnees['id_jeu'] ?>.jpg" id="img" alt="jacquette">
 					<ul>
 						<li>Nom du jeu : <a href="jeu.php?id=<?php echo $donnees['id_jeu'] ?>"class="txt"><?php echo $donnees['nom'] ?></a></li>
@@ -83,7 +84,7 @@
 						<li>Nombre maximum de joueurs : <?php echo $donnees['nb_max'] ?></li>
 						<li>Nombre minimum de joueurs : <?php echo $donnees['nb_min'] ?></li>
 					</ul>
-					<p><br /><br /><?php echo $donnees['description'] ?></p>
+					<p><br /><?php echo $donnees['description'] ?></p>
 					<?php
 					}
 				}

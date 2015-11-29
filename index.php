@@ -43,7 +43,11 @@
 				?>
 						<table>
 							<tr>
-								<td class="bordures"><a href="jeu.php?id=<?php echo $donnees['id_jeu'] ?>" class="txt"><?php echo $donnees['nom'] ?> </a> </td>
+							<th colspan="2" class="bordures"><a href="jeu.php?id=<?php echo $donnees['id_jeu'] ?>" class="txt"><?php echo $donnees['nom'] ?> </a> </th>
+							</tr>
+							<br/>
+							<tr>
+								
 								<td class="bordures"><img src="IMG/<?php echo $donnees['id_jeu'] ?>.jpg" id="img" alt="jacquette"></td>
 								<td class="bordures"><p><?php echo $donnees['description'] ?></p> </td>
 							</tr>
