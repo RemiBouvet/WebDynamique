@@ -1,4 +1,5 @@
 <?php
+	//On inclut le fichier pour se connecter à la base de donnée et le fichier qui contient les fonctions.
 	include("include/connectionBDD.php");
 	include("include/fonction.php");
 ?>
@@ -15,7 +16,7 @@
         <h1>LUDOTHEQUE - jeu</h1>
         <nav>
           <?php
-				
+				//On inclut le fichier qui contient le menu du site.
 				include("menu.php");
 			?>
         </nav>
@@ -28,7 +29,8 @@
 			    <h2>Connexion</h2>
             <section>
             <?php
-            include("authentification.php");
+            	//On inclut le fichier qui contient le module de connection.
+            	include("authentification.php");
             ?>
         </section>
 		</div>
@@ -38,31 +40,31 @@
 
 			<section class="bloc_droit">
 				<?php
-				if(!isset($_GET["id"])){
+				if(!isset($_GET["id"])){ //Si il n'y a pas d'id du jeu à afficher alors on redirige vers la page où se trouve tous les jeux.
 					header("Location: jeux.php");
 				}
-				else {
+				else { //Sinon on traite les informations pour l'ajout au panier
 					$req = "SELECT * FROM " . $GLOBALS["Jeux"] ." WHERE id_jeu =".$_GET["id"];
 					$jeu = $GLOBALS["BDD"]->query($req);
 					while($donnees = $jeu->fetch()) {
-						if($donnees['stock'] > 0){
-								if(!connecte()){
+						if($donnees['stock'] > 0){ // Si le jeu est en stock
+								if(!connecte()){ //Si l'utilisateur n'est pas connecté
 									echo "Le jeu est disponible, connectez vous pour pouvoir l'ajouter au panier.</ br>";
 								}
-								else {
-									if(isset($_POST["ajouter"])){
-										AjoutPanier($_GET["id"]);
+								else { //Si l'utilisateur est connecté
+									if(isset($_POST["ajouter"])){ // Si l'utilisateur a appuyé sur le bouton ajouter
+										AjoutPanier($_GET["id"]); // Ajouter l'article au panier
 										echo "Le jeu a bien été ajouté au panier.</br>";
 									}
-									else{
-										if(NombreArticle() >= 3){
+									else{ // Sinon si l'utilisateur n'a pas appuyé sur le bouton ajouter
+										if(NombreArticle() >= 3){ // Si il a déjà 3 articles dans son panier
 											echo "Vous ne pouvez plus ajouter un jeu à votre panier car vous avez atteints la limite qui est de 3.";
 										}
-										else {
-											if(JeuPanier($_GET["id"])){
+										else { //Sinon si il a moins de trois articles
+											if(JeuPanier($_GET["id"])){ // Si le jeu est déjà dans son panier
 												echo "Le jeu est déjà dans votre panier.";
 											}
-											else {
+											else { //Sinon on affiche le bouton pour ajouter au panier
 												echo "<form method='post' action='jeu.php?id=".$_GET["id"]."'>
 													<input type='submit' value='Ajouter au panier' name ='ajouter' />
 												</form>";
@@ -71,9 +73,10 @@
 									}
 								}
 							}
-							else {
+							else { // Si le jeu n'est pas en stock
 								echo "Le jeu est indisponible pour le moment.</ br>";
 							}
+					//On affiche toutes les informations sur le jeu en question
 					?>
 					<br />
 					<img src="IMG/<?php echo $donnees['id_jeu'] ?>.jpg" id="img" alt="jacquette">

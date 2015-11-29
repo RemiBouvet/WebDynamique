@@ -1,4 +1,5 @@
 <?php
+	//On inclut le fichier pour se connecter à la base de donnée et le fichier qui contient les fonctions.
 	include("include/connectionBDD.php");
 	include("include/fonction.php");
 ?>
@@ -14,6 +15,7 @@
         <h1>LUDOTHEQUE - Accueil</h1>
         <nav>
           <?php
+          		//On inclut le fichier qui contient le menu du site.
 				include("menu.php");
 			?>
         </nav>
@@ -26,7 +28,8 @@
 			    <h2>Connexion</h2>
             <section>
             <?php
-            include("authentification.php");
+            	//On inclut le fichier qui contient le module de connection.
+            	include("authentification.php");
             ?>
         	</section>
 		</div>
@@ -36,9 +39,11 @@
 
 			<section class="bloc_droit">
 				<?php
+					//On recherche les jeux à afficher sur l'index
 					$index = chercherIndex();
 				?>
 				<?php
+					//Affichage des jeux à l'aide d'un tableau
 					while($donnees = $index->fetch()) {
 				?>
 						<table>
