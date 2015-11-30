@@ -1,4 +1,5 @@
 <?php
+	ob_start();
 	//On inclut le fichier pour se connecter à la base de donnée et le fichier qui contient les fonctions.
 	include("include/connectionBDD.php");
 	include("include/fonction.php");
@@ -101,3 +102,6 @@
 	</div>
 	</body>
 </html>
+<?php
+	ob_end_flush();
+?>

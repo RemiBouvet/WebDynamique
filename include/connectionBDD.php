@@ -1,10 +1,10 @@
 <?php 
 		session_start(); // On démarre une nouvelle session ou on reprend une session existante
 		//Information de connection à la base
-		$Serveur="localhost";//info.univ-lemans.fr
-		$Utilisateur="root"; //info201a_user
+		$Serveur="info.univ-lemans.fr";//localhost
+		$Utilisateur="info201a_user"; //root
 		$Base="info201a";
-		$MDP=''; //com72
+		$MDP='com72';
 		$bdd=new PDO('mysql:host='.$Serveur.';dbname='.$Base.'', $Utilisateur, $MDP, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 		if (!$bdd) {
 			exit("Connection à la base de donnée impossible.");
